@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cultural Handposes</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier"></script>
+
+		<script src="sketch.js"></script>
+		<style>
+            #status {
+                color: red;
+            }
+            #trainingContainer {
+                display:flex;
+                gap: 20px;
+                border-style: outset;
+            }
+			body {
+				margin: 3;
+				padding: 1;
+			}
+			canvas {
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>KNN Classification on Webcam Images with Hand pose model. Built with p5.js</h2>
+		<div id="canvasContainer"></div>
+		<p id="status">Loading Model...</p>
+		<p>
+		  KNN Classifier with mobileNet model labeled this
+		  as Class: <span id="result">...</span>
+		  with a confidence of <span id="confidence">...</span>
+		</p>
+
+        <div id="trainingContainer">
+            <div id="col1">
+                <div id="ok">
+                    <p>
+                        <span class="emoji"> 👌 </span>
+                        <button id="addClassOk">Add an Example to Class Ok</button>
+                        <button id="resetOk">Reset Class Ok</button>
+                    </p>
+                    <p>
+                        <span id="exampleOk">0</span> Ok examples | Confidence in Ok is: <span id="confidenceOk">0</span>
+                    </p>
+                </div>
+        
+                <div id="fingersCrossed">
+                    <p>
+                        <span class="emoji"> 🤞 </span>
+                        <button id="addClassFingersCrossed">Add an Example to Class FingersCrossed</button>
+                        <button id="resetFingersCrossed">Reset Class FingersCrossed</button>
+                    </p>
+                    <p>
+                        <span id="exampleFingersCrossed">0</span> FingersCrossed examples | Confidence in FingersCrossed is: <span id="confidenceFingersCrossed">0</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div id="col2">
+                <div id="rockOn">
+                    <p>
+                        <span class="emoji"> 🤟 </span>
+                        <button id="addClassRockOn">Add an Example to Class RockOn</button>
+                        <button id="resetRockOn">Reset Class RockOn</button>
+                    </p>
+                    <p>
+                        <span id="exampleRockOn">0</span> RockOn examples | Confidence in RockOn is: <span id="confidenceRockOn">0</span>
+                    </p>
+                </div>
+        
+                <div id="thumbsUp">
+                    <p>
+                        <span class="emoji"> 👍 </span>
+                        <button id="addClassThumbsUp">Add an Example to Class ThumbsUp</button>
+                        <button id="resetThumbsUp">Reset Class ThumbsUp</button>
+                    </p>
+                    <p>
+                        <span id="exampleThumbsUp">0</span> ThumbsUp examples | Confidence in ThumbsUp is: <span id="confidenceThumbsUp">0</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            <button id="buttonPredict">Start predicting!</button>
+            <button id="clearAll">Clear all classes</button><br />
+        </p>
+	</body>
+</html>
