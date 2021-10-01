@@ -16,6 +16,9 @@
 
 		<script src="sketch.js"></script>
 		<style>
+            #container {
+                display: flex;
+            }
             #status {
                 color: red;
             }
@@ -35,7 +38,20 @@
 	</head>
 	<body>
 		<h2>KNN Classification on Webcam Images with Hand pose model. Built with p5.js</h2>
-		<div id="canvasContainer"></div>
+		<div id="container">
+            <div id="output-left">
+                <!-- display output image here -->
+                <img id="left" 
+                src="/assets/beforeClassify.png" />
+            </div>
+            <div id="canvasContainer">
+                <!-- video goes here -->
+            </div>
+            <div id="output-right">
+                <img id="right" 
+                src="/assets/beforeClassify.png" />
+            </div>
+        </div>
 		<p id="status">Loading Model...</p>
 		<p>
 		  KNN Classifier with mobileNet model labeled this

@@ -1,12 +1,13 @@
 let model, video, keypoints, predictions=[]; 
+let okL, okR, fcL, fcR, roL, roR, tuL, tuR;
 // Create a KNN classifier
 const classifier = knnClassifier.create();
 
 const LABELS_MAP = {
-	'ok': 0,
-	'fingersCrossed': 1,
-	'rockOn': 2,
-	'thumbsUp': 3 
+	'Ok': 0,
+	'FingersCrossed': 1,
+	'RockOn': 2,
+	'ThumbsUp': 3 
 };
 
 function preload() {
@@ -18,10 +19,18 @@ function preload() {
     
 	// Create the UI buttons
 	createButtons();
+    okL = loadImage('assets/okClassifyL.png');
+    okR = loadImage('assets/okClassifyR.png');
+    fcL = loadImage('assets/fcClassifyL.png');
+    fcR = loadImage('assets/fcClassifyR.png');
+    roL = loadImage('assets/roClassifyL.png');
+    roR = loadImage('assets/roClassifyR.png');
+    tuL = loadImage('assets/tuClassifyL.png');
+    tuR = loadImage('assets/tuClassifyR.png');
 }
 
 function setup() {
-	const canvas = createCanvas(600, 400);
+	const canvas = createCanvas(480, 360);
 	canvas.parent('canvasContainer');
 }
 
@@ -41,7 +50,6 @@ function draw() {
 	  drawKeypoints();
 	  drawSkeleton();
 	}
-	
 }
 
 async function predictHand() {
@@ -82,6 +90,23 @@ async function classify() {
 			if (results.label) {
 				select('#result').html(results.label);
 				select('#confidence').html(`${confidences[results.label] * 100} %`);
+                if(results.label === 'Ok') {
+                    document.getElementById("left").src = "/assets/okClassifyL.png";
+                    document.getElementById("right").src = "/assets/okClassifyR.png";
+                }
+                if(results.label === 'FingersCrossed') {
+                    document.getElementById("left").src = "/assets/fcClassifyL.png";
+                    document.getElementById("right").src = "/assets/fcClassifyR.png";
+                }
+                if(results.label === 'RockOn') {
+                    document.getElementById("left").src = "/assets/roClassifyL.png";
+                    document.getElementById("right").src = "/assets/roClassifyR.png";
+                }
+                if(results.label === 'ThumbsUp') {
+                    document.getElementById("left").src = "/assets/tuClassifyL.png";
+                    document.getElementById("right").src = "/assets/tuClassifyR.png";
+                }
+
 			}
 
 			select('#confidenceOk').html(`${confidences['Ok'] ? confidences['Ok'] * 100 : 0} %`);
